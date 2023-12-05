@@ -1,0 +1,269 @@
+{
+	"info": {
+		"_postman_id": "611b1cee-a9f8-46e1-b12c-6bd78d77bd1b",
+		"name": "go-rest-api-sprint-6",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24127020"
+	},
+	"item": [
+		{
+			"name": "get-all-tasks",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Ответ должен содержать код статуса 200 и данные в формате json', function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Количество задач = 2, а также наличие необходимых полей\", function () {\r",
+							"    var tasks = pm.response.json();\r",
+							"    pm.expect(Object.keys(tasks).length).to.equal(2);\r",
+							"    Object.values(tasks).forEach(function(task) {\r",
+							"        pm.expect(task).to.have.property('id');\r",
+							"        pm.expect(task).to.have.property('description');\r",
+							"        pm.expect(task).to.have.property('note');\r",
+							"        pm.expect(task).to.have.property('applications');\r",
+							"    });\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/tasks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tasks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-task-by-id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Ответ должен содержать код статуса 200 и данные в формате json', function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Количество задач, а также наличие необходимых полей\", function () {\r",
+							"    var tasks = pm.response.json();\r",
+							"    pm.expect(tasks).to.have.property('id');\r",
+							"    pm.expect(tasks).to.have.property('description');\r",
+							"    pm.expect(tasks).to.have.property('note');\r",
+							"    pm.expect(tasks).to.have.property('applications');\r",
+							"    pm.expect(tasks).property('id').to.equal('2');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/tasks/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tasks",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add-new-task",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Ответ должен содержать код статуса 201 и данные в формате json\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"3\",\r\n    \"description\": \"Пройти ревью\",\r\n    \"note\": \"Ревьюер обязательно оценит мои старания!\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/tasks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tasks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-all-tasks-again",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Ответ должен содержать код статуса 200 и данные в формате json', function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Количество задач = 3, а также наличие необходимых полей\", function () {\r",
+							"    var tasks = pm.response.json();\r",
+							"    pm.expect(Object.keys(tasks).length).to.equal(3);\r",
+							"    Object.values(tasks).forEach(function(task) {\r",
+							"        pm.expect(task).to.have.property('id');\r",
+							"        pm.expect(task).to.have.property('description');\r",
+							"        pm.expect(task).to.have.property('note');\r",
+							"        pm.expect(task).to.have.property('applications');\r",
+							"    });\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/tasks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tasks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete-new-task",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Ответ должен содержать код статуса 201 и данные в формате json\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/tasks/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tasks",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-all-tasks-again",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Ответ должен содержать код статуса 200 и данные в формате json', function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Количество задач = 2, а также наличие необходимых полей\", function () {\r",
+							"    var tasks = pm.response.json();\r",
+							"    pm.expect(Object.keys(tasks).length).to.equal(2);\r",
+							"    Object.values(tasks).forEach(function(task) {\r",
+							"        pm.expect(task).to.have.property('id');\r",
+							"        pm.expect(task).to.have.property('description');\r",
+							"        pm.expect(task).to.have.property('note');\r",
+							"        pm.expect(task).to.have.property('applications');\r",
+							"    });\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/tasks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tasks"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
